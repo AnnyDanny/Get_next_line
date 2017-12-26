@@ -17,7 +17,7 @@
 
 
 int get_next_line(const int fd, char **line);
-int copy_from_buf_to_str(char *buf);
+int get_in_list(char *tmp, t_list *list);
 
 
 #endif
