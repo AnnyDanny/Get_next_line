@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-// void	fill_line(char **line, t_list *oneelem)
+// t_list	fill_line(char **line, t_list *oneelem)
 // {
 	
 // }
@@ -31,11 +31,11 @@ int get_in_list(char *tmp, t_list *list, char **line)
 	
 	i = 0;
 	oneelem = ft_lstnew(tmp, ft_strlen(tmp));
-	oneelem->content = 
+	oneelem->content = tmp;
 	*line = oneelem->content;
 	// while (list->next)
 	// 	list = 
-	ft_strdel(buf);
+	printf("%s\n", *line);
 	return (1);
 }
 
@@ -45,13 +45,15 @@ int get_in_list(char *tmp, t_list *list, char **line)
  	char *tmp;
  	int ret;
  	t_list *vika;
+ 	int fd1;
  	
-	fd = open("test_gnl.c", O_RDONLY);
- 	if (fd == -1)
+ 	fd1 = (int)fd;
+	fd1 = open("test_gnl.c", O_RDONLY);
+ 	if (fd1 == -1)
  		return (0);
  	buf = ft_strnew(BUFF_SIZE);
  	tmp = ft_strnew(BUFF_SIZE);
- 	while (ret = (read(fd, buf, BUFF_SIZE) >= 1))
+ 	while ((ret = (read(fd1, buf, BUFF_SIZE)) >= 1))
  	{
  		tmp = ft_strjoin(tmp, buf);
 		if (ft_strchr(tmp, '\n'))
@@ -59,21 +61,21 @@ int get_in_list(char *tmp, t_list *list, char **line)
 		 	get_in_list(tmp, vika, line);
 		 	break;
 		}
-
  	}
- 	if (close(fd) == -1)
+	ft_strdel(&buf);
+ 	if (close(fd1) == -1)
  		return (0);
  	printf("%s\n", buf);
  	return (1);
  }
 
- // int main(void)
- // {
- // 	char *str;
- // 	int fd;
+ int main(void)
+ {
+ 	char *str;
+ 	int fd;
 
- // 	printf("%d\n", get_next_line(fd, &str));
- // 	return (0);
- // }
+ 	printf("%d\n", get_next_line(fd, &str));
+ 	return (0);
+ }
 
 
