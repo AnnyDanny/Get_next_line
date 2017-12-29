@@ -23,19 +23,18 @@
 	
 // }
 
-int get_in_list(char *tmp, t_list *list, char **line)
+int get_in_list(char *tmp, t_list **list, char **line)
 {
 	int i;
 	int countstr;
 	t_list *oneelem;
 	
 	i = 0;
+	printf("what is tmp %s\n", tmp);
+	*line = ft_strsub(tmp, 0, ft_countstrclen(tmp, '\n'));
+	tmp = ft_strchr(tmp, '\n');
 	oneelem = ft_lstnew(tmp, ft_strlen(tmp));
-	oneelem->content = tmp;
-	*line = oneelem->content;
-	// while (list->next)
-	// 	list = 
-	printf("%s\n", *line);
+	ft_lstadd(&(*list), oneelem);
 	return (1);
 }
 
@@ -44,28 +43,23 @@ int get_in_list(char *tmp, t_list *list, char **line)
  	char *buf;
  	char *tmp;
  	int ret;
- 	t_list *vika;
- 	int fd1;
+ 	static t_list *vika;
  	
- 	fd1 = (int)fd;
-	fd1 = open("test_gnl.c", O_RDONLY);
- 	if (fd1 == -1)
- 		return (0);
  	buf = ft_strnew(BUFF_SIZE);
  	tmp = ft_strnew(BUFF_SIZE);
- 	while ((ret = (read(fd1, buf, BUFF_SIZE)) >= 1))
+ 	if (vika)
+ 		tmp = vika->content;
+ 	while ((ret = (read(fd, buf, BUFF_SIZE)) >= 1))
  	{
  		tmp = ft_strjoin(tmp, buf);
 		if (ft_strchr(tmp, '\n'))
 		{
-		 	get_in_list(tmp, vika, line);
+		 	get_in_list(tmp, &vika, line);
 		 	break;
 		}
  	}
 	ft_strdel(&buf);
- 	if (close(fd1) == -1)
- 		return (0);
- 	printf("%s\n", buf);
+ 	// printf("%s\n", buf);
  	return (1);
  }
 
@@ -74,7 +68,15 @@ int get_in_list(char *tmp, t_list *list, char **line)
  	char *str;
  	int fd;
 
- 	printf("%d\n", get_next_line(fd, &str));
+	fd = open("test_gnl.c", O_RDONLY);
+ 	if (fd == -1)
+ 		return (0);
+ 	get_next_line(fd, &str);
+ 	printf("%s\n", (str));
+ 	get_next_line(fd, &str);
+ 	printf("%s\n", (str));
+ 	if (close(fd) == -1)
+ 		return (0);
  	return (0);
  }
 
