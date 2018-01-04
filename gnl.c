@@ -30,9 +30,13 @@ int get_in_list(char *tmp, t_list **list, char **line)
 	t_list *oneelem;
 	
 	i = 0;
-	printf("what is tmp %s\n", tmp);
+	// printf("what is tmp %s\n", tmp);
 	*line = ft_strsub(tmp, 0, ft_countstrclen(tmp, '\n'));
+	// printf("line %p\n", *line);
 	tmp = ft_strchr(tmp, '\n');
+	while (tmp)
+		tmp++;
+	// printf("tmp %p\n", &tmp);
 	oneelem = ft_lstnew(tmp, ft_strlen(tmp));
 	ft_lstadd(&(*list), oneelem);
 	return (1);
@@ -49,17 +53,20 @@ int get_in_list(char *tmp, t_list **list, char **line)
  	tmp = ft_strnew(BUFF_SIZE);
  	if (vika)
  		tmp = vika->content;
- 	while ((ret = (read(fd, buf, BUFF_SIZE)) >= 1))
+ 	while ((ret = read(fd, buf, BUFF_SIZE)) >= 1)
  	{
+	 	// printf("buf1 %s\n", buf);
+	 	// printf("pointer of tmp %p\n", tmp);
+	 	// printf("pointer of buf1 %p\n", buf);
+	 	// printf("ret %p\n", &ret);
+	 	// printf("vika %p\n", &vika);
+	 	// printf("vika->content %p\n", &vika->content);
  		tmp = ft_strjoin(tmp, buf);
 		if (ft_strchr(tmp, '\n'))
-		{
-		 	get_in_list(tmp, &vika, line);
 		 	break;
-		}
- 	}
-	ft_strdel(&buf);
- 	// printf("%s\n", buf);
+	}
+	get_in_list(tmp, &vika, line);
+ 	// printf("buf2 %s\n", buf);
  	return (1);
  }
 
@@ -72,9 +79,12 @@ int get_in_list(char *tmp, t_list **list, char **line)
  	if (fd == -1)
  		return (0);
  	get_next_line(fd, &str);
- 	printf("%s\n", (str));
+ 	printf("str %s\n", str); 
+ 	// printf("pointer of str %p\n", str);
  	get_next_line(fd, &str);
- 	printf("%s\n", (str));
+ 	printf("str %s\n", str);
+ 	get_next_line(fd, &str);
+ 	printf("str %s\n", str);
  	if (close(fd) == -1)
  		return (0);
  	return (0);

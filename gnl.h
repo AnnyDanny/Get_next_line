@@ -13,7 +13,7 @@
 #ifndef GNL_H
 # define GNL_H
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 2
 
 
 int get_next_line(const int fd, char **line);
