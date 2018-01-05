@@ -1,3 +1,0 @@
-asdffgg
-qwert
-zxcvb

@@ -33,9 +33,14 @@ int get_in_list(char *tmp, t_list **list, char **line)
 	// printf("what is tmp %s\n", tmp);
 	*line = ft_strsub(tmp, 0, ft_countstrclen(tmp, '\n'));
 	// printf("line %p\n", *line);
-	tmp = ft_strchr(tmp, '\n');
-	while (tmp)
-		tmp++;
+	// printf("%s\n", tmp);
+	// while (tmp)
+	// {
+	// 	printf("%s\n", tmp);
+	if (ft_strchr(tmp, '\n') != NULL)
+		tmp = ft_strchr(tmp, '\n');
+	// }
+	tmp++;
 	// printf("tmp %p\n", &tmp);
 	oneelem = ft_lstnew(tmp, ft_strlen(tmp));
 	ft_lstadd(&(*list), oneelem);
@@ -70,24 +75,24 @@ int get_in_list(char *tmp, t_list **list, char **line)
  	return (1);
  }
 
- int main(void)
- {
- 	char *str;
- 	int fd;
+ // int main(void)
+ // {
+ // 	char *str;
+ // 	int fd;
 
-	fd = open("test_gnl.c", O_RDONLY);
- 	if (fd == -1)
- 		return (0);
- 	get_next_line(fd, &str);
- 	printf("str %s\n", str); 
- 	// printf("pointer of str %p\n", str);
- 	get_next_line(fd, &str);
- 	printf("str %s\n", str);
- 	get_next_line(fd, &str);
- 	printf("str %s\n", str);
- 	if (close(fd) == -1)
- 		return (0);
- 	return (0);
- }
+	// fd = open("test_gnl.c", O_RDONLY);
+ // 	if (fd == -1)
+ // 		return (0);
+ // 	get_next_line(fd, &str);
+ // 	printf("str %s\n", str); 
+ // 	// printf("pointer of str %p\n", str);
+ // 	get_next_line(fd, &str);
+ // 	printf("str %s\n", str);
+ // 	get_next_line(fd, &str);
+ // 	printf("str %s\n", str);
+ // 	if (close(fd) == -1)
+ // 		return (0);
+ // 	return (0);
+ // }
 
 
