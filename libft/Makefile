@@ -1,5 +1,6 @@
 
 NAME = libft.a
+HEADER = -c -I ./includes/
 FLAGS = -Wall -Wextra -Werror
 SRC = ft_memchr.c ft_putstr.c ft_striter.c ft_strnew.c ft_atoi.c \
 ft_memcmp.c	ft_putstr_fd.c ft_striteri.c ft_strnstr.c ft_bzero.c \
@@ -21,7 +22,7 @@ $(NAME): $(OBJ)
 		ar rc $@ $^
 
 %.o: %.c
-		gcc $(FLAGS) -c -o $@ $<
+		gcc $(HEADER) $(FLAGS) -c -o $@ $<
 
 clean:
 			rm -f *.o

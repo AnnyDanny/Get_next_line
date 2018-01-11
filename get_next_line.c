@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
-#include "gnl.h"
+#include "get_next_line.h"
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -26,7 +25,7 @@
 int get_in_list(char *tmp, t_list **list, char **line)
 {
 	int i;
-	int countstr;
+	// int countstr;
 	t_list *oneelem;
 	
 	i = 0;
@@ -38,11 +37,15 @@ int get_in_list(char *tmp, t_list **list, char **line)
 	// {
 	// 	printf("%s\n", tmp);
 	if (ft_strchr(tmp, '\n') != NULL)
+	{
 		tmp = ft_strchr(tmp, '\n');
+		tmp++;
+		oneelem = ft_lstnew(tmp, ft_strlen(tmp));
+	}
+	else
+		oneelem = ft_lstnew("", 1);
 	// }
-	tmp++;
 	// printf("tmp %p\n", &tmp);
-	oneelem = ft_lstnew(tmp, ft_strlen(tmp));
 	ft_lstadd(&(*list), oneelem);
 	return (1);
 }
@@ -56,6 +59,19 @@ int get_in_list(char *tmp, t_list **list, char **line)
  	
  	buf = ft_strnew(BUFF_SIZE);
  	tmp = ft_strnew(BUFF_SIZE);
+ 	while (vika && (size_t)fd != vika->content_size)
+ 	{
+ 		vika = vika->next;
+ 	}
+ 	if (vika->content_size == (size_t)fd && vika->content)
+ 	{
+ 		if ((tmp = ft_strchr(tmp, '\n')))
+ 		{
+ 			
+ 		}
+
+ 	}
+
  	if (vika)
  		tmp = vika->content;
  	while ((ret = read(fd, buf, BUFF_SIZE)) >= 1)
@@ -70,29 +86,30 @@ int get_in_list(char *tmp, t_list **list, char **line)
 		if (ft_strchr(tmp, '\n'))
 		 	break;
 	}
+	if (ret == 0 && )
 	get_in_list(tmp, &vika, line);
  	// printf("buf2 %s\n", buf);
  	return (1);
  }
 
- // int main(void)
- // {
- // 	char *str;
- // 	int fd;
+ int main(void)
+ {
+ 	char *str;
+ 	int fd;
 
-	// fd = open("test_gnl.c", O_RDONLY);
- // 	if (fd == -1)
- // 		return (0);
- // 	get_next_line(fd, &str);
- // 	printf("str %s\n", str); 
- // 	// printf("pointer of str %p\n", str);
- // 	get_next_line(fd, &str);
- // 	printf("str %s\n", str);
- // 	get_next_line(fd, &str);
- // 	printf("str %s\n", str);
- // 	if (close(fd) == -1)
- // 		return (0);
- // 	return (0);
- // }
+	fd = open("test_gnl.c", O_RDONLY);
+ 	if (fd == -1)
+ 		return (0);
+ 	get_next_line(fd, &str);
+ 	printf("str %s\n", str); 
+ 	// printf("pointer of str %p\n", str);
+ 	get_next_line(fd, &str);
+ 	printf("str %s\n", str);
+ 	get_next_line(fd, &str);
+ 	printf("str %s\n", str);
+ 	if (close(fd) == -1)
+ 		return (0);
+ 	return (0);
+ }
 
 
