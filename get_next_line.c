@@ -18,6 +18,30 @@
 #include <unistd.h>
 #include <string.h>
 
+t_list	*multifile_get_in_list(int fd, t_list **vika)
+{
+	t_list *buf;
+	t_list *new;
+
+	if (!vika)
+	{
+		*vika = ft_lstnew("", 1);
+		(*vika)->content_size = fd;
+		return (*vika);
+	}
+	buf = *vika;
+	while (buf && (size_t)fd != buf->content_size)
+ 	{
+ 		buf = buf->next;
+ 	}
+ 	if (buf && buf->content_size == (size_t)fd)
+ 		return (buf);
+ 	new = ft_lstnew("", 1);
+ 	new->content_size = fd;
+ 	ft_lstadd(vika, new);
+ 	return (*vika);
+}
+
 int get_in_list(char *tmp, t_list **list, char **line)
 {
 	int i;
@@ -39,10 +63,13 @@ int get_next_line(const int fd, char **line)
 	char *buf;
 	char *tmp;
 	int ret;
+	t_list *buf2;
 	static t_list *vika;
 
 	buf = ft_strnew(BUFF_SIZE);
- 	tmp = ft_strnew(BUFF_SIZE);
+ 	// tmp = ft_strnew(BUFF_SIZE);
+ 	buf2 = multifile_get_in_list(fd, &vika);
+ 	tmp = buf2->content;
 	while ((ret = read(fd, buf, BUFF_SIZE)) >= 1)
 	{
 		// printf("tmpbeforejoin %s\n", tmp);
@@ -61,33 +88,33 @@ int get_next_line(const int fd, char **line)
 	return (1);
 }
 
-// int main(void)
-//  {
-//  	char *str;
-//  	int fd;
+int main(void)
+ {
+ 	char *str;
+ 	int fd;
 
-// 	fd = open("test_gnl2.c", O_RDONLY);
-//  	if (fd == -1)
-//  		return (0);
-//  	printf("%d\n", get_next_line(fd, &str));
-//  	printf("str1 %s\n", str);
-//  	printf("%d\n", get_next_line(fd, &str));
-//  	printf("str1 %s\n", str);
-//  	// get_next_line(fd, &str);
-//  	printf("%d\n", get_next_line(fd, &str));
-//  	printf("str2 %s\n", str);
-//  	printf("%d\n", get_next_line(fd, &str));
-//  	printf("str1 %s\n", str);
-//  	// // get_next_line(fd, &str);
-//  	// printf("%d\n", get_next_line(fd, &str));
-//  	// printf("str3 %s\n", str);
-//  	// printf("%d\n", get_next_line(fd, &str));
-//  	// printf("str4 %s\n", str);
-// 	// // get_next_line(fd, &str);
-//  // 	printf("str4 %s\n", str);
-// 	// get_next_line(fd, &str);
-//  // 	printf("str5 %s\n", str);
-//  	if (close(fd) == -1)
-//  		return (0);
-//  	return (0);
-//  }
+	fd = open("test_gnl2.c", O_RDONLY);
+ 	if (fd == -1)
+ 		return (0);
+ 	printf("%d\n", get_next_line(fd, &str));
+ 	printf("str1 %s\n", str);
+ 	printf("%d\n", get_next_line(fd, &str));
+ 	printf("str1 %s\n", str);
+ 	// get_next_line(fd, &str);
+ 	printf("%d\n", get_next_line(fd, &str));
+ 	printf("str2 %s\n", str);
+ 	printf("%d\n", get_next_line(fd, &str));
+ 	printf("str1 %s\n", str);
+ 	// // get_next_line(fd, &str);
+ 	// printf("%d\n", get_next_line(fd, &str));
+ 	// printf("str3 %s\n", str);
+ 	// printf("%d\n", get_next_line(fd, &str));
+ 	// printf("str4 %s\n", str);
+	// // get_next_line(fd, &str);
+ // 	printf("str4 %s\n", str);
+	// get_next_line(fd, &str);
+ // 	printf("str5 %s\n", str);
+ 	if (close(fd) == -1)
+ 		return (0);
+ 	return (0);
+ }

@@ -32,5 +32,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_strnew(size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_countstrclen(char *str, int c);
+t_list	*multifile_get_in_list(int fd, t_list **vika);
+void	ft_lstadd(t_list **alst, t_list *new);
 
 #endif
