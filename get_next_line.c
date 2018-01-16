@@ -92,29 +92,48 @@ int main(void)
  {
  	char *str;
  	int fd;
+ 	int fd1;
+ 	int fd2;
 
-	fd = open("test_gnl2.c", O_RDONLY);
+	fd = open("test_gnl.c", O_RDONLY);
+	fd1 = open("test_gnl2.c", O_RDONLY);
+	fd2 = open("test_gnl3.c", O_RDONLY);
  	if (fd == -1)
  		return (0);
+ 	if (fd1 == -1)
+ 		return (0);
+ 	if (fd2 == -1)
+ 		return (0);
  	printf("%d\n", get_next_line(fd, &str));
- 	printf("str1 %s\n", str);
- 	printf("%d\n", get_next_line(fd, &str));
- 	printf("str1 %s\n", str);
- 	// get_next_line(fd, &str);
- 	printf("%d\n", get_next_line(fd, &str));
- 	printf("str2 %s\n", str);
- 	printf("%d\n", get_next_line(fd, &str));
- 	printf("str1 %s\n", str);
- 	// // get_next_line(fd, &str);
+ 	printf("str1.1 %s\n", str);
+ 	printf("fd %d\n", fd);
+
+ 	printf("%d\n", get_next_line(fd1, &str));
+ 	printf("str2.1 %s\n", str);
+ 	printf("fd1 %d\n", fd1);
+
+ 	printf("%d\n", get_next_line(fd2, &str));
+ 	printf("str3.1 %s\n", str);
+ 	printf("fd2 %d\n", fd2);
  	// printf("%d\n", get_next_line(fd, &str));
- 	// printf("str3 %s\n", str);
- 	// printf("%d\n", get_next_line(fd, &str));
- 	// printf("str4 %s\n", str);
+ 	// printf("str1.2 %s\n", str);
+ 	// printf("fd %d\n", fd);
+ 	// // // get_next_line(fd, &str);
+ 	// printf("%d\n", get_next_line(fd1, &str));
+ 	// printf("str2.2 %s\n", str);
+ 	// printf("fd1 %d\n", fd1);
+ 	// printf("%d\n", get_next_line(fd2, &str));
+ 	// printf("str3.2 %s\n", str);
+ 	// printf("fd2 %d\n", fd2);
 	// // get_next_line(fd, &str);
  // 	printf("str4 %s\n", str);
 	// get_next_line(fd, &str);
  // 	printf("str5 %s\n", str);
  	if (close(fd) == -1)
+ 		return (0);
+ 	if (close(fd1) == -1)
+ 		return (0);
+ 	if (close(fd2) == -1)
  		return (0);
  	return (0);
  }

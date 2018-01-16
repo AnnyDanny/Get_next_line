@@ -13,7 +13,7 @@
 #ifndef GNL_H
 # define GNL_H
 
-# define BUFF_SIZE 10
+# define BUFF_SIZE 7
 
 typedef	struct s_list
 {
