@@ -13,7 +13,7 @@
 #ifndef GNL_H
 # define GNL_H
 
-# define BUFF_SIZE 7
+# define BUFF_SIZE 5
 
 typedef	struct s_list
 {
@@ -23,7 +23,7 @@ typedef	struct s_list
 }					t_list;
 
 int 	get_next_line(const int fd, char **line);
-int 	get_in_list(char *tmp, t_list **list, char **line);
+int 	get_in_list(char *tmp, t_list *list, char **line);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *str, int ch);
 void	ft_lstadd(t_list **alst, t_list *new);
@@ -34,5 +34,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_countstrclen(char *str, int c);
 t_list	*multifile_get_in_list(int fd, t_list **vika);
 void	ft_lstadd(t_list **alst, t_list *new);
+char	*ft_strdup(const char *str);
 
 #endif

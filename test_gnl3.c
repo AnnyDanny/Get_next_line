@@ -1,2 +1,0 @@
-every day
-like holiday
