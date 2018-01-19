@@ -94,8 +94,8 @@ int get_next_line(const int fd, char **line)
 		return (0);
 	if (ret == -1)
 		return (-1);
-	// if (vika)
-	// 	tmp = ft_strjoin(vika->content, tmp);
+	if (vika)
+		tmp = ft_strjoin(vika->content, tmp);
 	get_in_list(tmp, buf2, line);
 	return (1);
 }
