@@ -22,7 +22,7 @@ $(NAME): $(OBJ)
 		ar rc $@ $^
 
 %.o: %.c
-		gcc $(HEADER) $(FLAGS) -c -o $@ $<
+		@gcc $(HEADER) $(FLAGS) -c -o $@ $<
 
 clean:
 			rm -f *.o
