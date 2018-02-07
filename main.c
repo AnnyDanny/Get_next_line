@@ -46,15 +46,15 @@ int main(void)
 	while (p < 3)
 	{
 		if (get_next_line(fd, &str) == 1)
-			printf("str1 %s\n", str);
+			printf("..............str1 %s\n", str);
 		else
 			p++;
 		if (get_next_line(fd1, &str) == 1)
-			printf("str2.2 %s\n", str);
+			printf("..............str2.2 %s\n", str);
 		else
 			p++;
 		if (get_next_line(fd2, &str) == 1)
-			printf("str3.2 %s\n", str);
+			printf("..............str3.2 %s\n", str);
 		else
 			p++;
 	}

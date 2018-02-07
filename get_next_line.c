@@ -33,13 +33,16 @@ t_list	*multifile_get_in_list(int fd, t_list **vika)
 	buf = *vika;
 	while (buf && (size_t)fd != buf->content_size)
  	{
-		// printf("buf with first call %s\n", buf->content);
+		// printf("multifile buf with first call %s\n", buf->content);
  		buf = buf->next;
  	}
  	if (buf)
- 	 	// printf("buf second %s\n", buf->content);
+ 	 	// printf("multifile buf second %s\n", buf->content);
  	if (buf && buf->content_size == (size_t)fd)
+ 	{
+ 		// printf("multifile2 buf second %s\n", buf->content);
  		return (buf);
+ 	}
  	new = ft_lstnew("", 1);
  	new->content_size = fd;
  	ft_lstadd(vika, new);
@@ -82,16 +85,16 @@ int get_next_line(const int fd, char **line)
 	buf = ft_strnew(BUFF_SIZE);
  	tmp = ft_strnew(BUFF_SIZE);
  	buf2 = multifile_get_in_list(fd, &vika);
-	printf("\nfd current %d\n", fd);
-	printf("vika in gnl %s fd in vika %zu\n", vika->content, vika->content_size);
+	// printf("\nfd current %d\n", fd);
+	// printf("vika in gnl %s fd in vika %zu\n", vika->content, vika->content_size);
 	vika2 = vika;
  	while (vika2)
  	{
- 		printf("vika2 in gnl %s fd in vika %zu\n", vika2->content, vika2->content_size);
+ 		// printf("vika2 in gnl %s fd in vika %zu\n", vika2->content, vika2->content_size);
  		vika2 = vika2->next;
  	}
- 	printf("buf2 %s fd in buf %zu\n", buf2->content, buf2->content_size);
- 	// tmp = buf2->content;
+ 	// printf("buf2 %s fd in buf2 %zu\n", buf2->content, buf2->content_size);
+ 	// tmp = buf2->content; does not matter here
  	// printf("buf with first call %s\n", buf);
  	// printf("tmp with first call %s\n", tmp);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
@@ -104,13 +107,14 @@ int get_next_line(const int fd, char **line)
 		if (ft_strchr(tmp, '\n'))
 			break;
 	}
+	tmp = ft_strjoin(buf2->content, tmp);
 	// printf("tmp after while %s\n", tmp);
 	if (ft_strlen(tmp) == 0 && ret == 0 && (vika == NULL || ft_strlen(vika->content) == 0))
 		return (0);
 	if (ret == -1)
 		return (-1);
-	if (vika)
-		tmp = ft_strjoin(vika->content, tmp);
+	// if (vika)
+	// 	tmp = ft_strjoin(vika->content, tmp);
 	get_in_list(tmp, buf2, line);
 	return (1);
 }
