@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
+#include <stdlib.h>
 
 
 int main(void)
@@ -33,37 +34,49 @@ int main(void)
 
 
 	char *str;
+
+
  	int fd;
- 	int fd1;
- 	int fd2;
- 	int p;
+ 	// int fd1;
+ 	// int fd2;
+ 	// int p;
 
- 	p = 0;
+ 	// p = 0;
 	fd = open("test_gnl.c", O_RDONLY);
-	fd1 = open("test_gnl2.c", O_RDONLY);
-	fd2 = open("test_gnl3.c", O_RDONLY);
 
-	while (p < 3)
+	while (get_next_line(fd, &str) > 0)
 	{
-		if (get_next_line(fd, &str) == 1)
-			printf("str1 %s\n", str);
-		else
-			p++;
-		if (get_next_line(fd1, &str) == 1)
-			printf("str2.2 %s\n", str);
-		else
-			p++;
-		if (get_next_line(fd2, &str) == 1)
-			printf("str3.2 %s\n", str);
-		else
-			p++;
+		printf("str %s\n", str);
+		free(str);
 	}
+	// fd1 = open("test_gnl2.c", O_RDONLY);
+	// fd2 = open("test_gnl3.c", O_RDONLY);
 
- 	if (close(fd) == -1)
- 		return (0);
- 	if (close(fd1) == -1)
- 		return (0);
- 	if (close(fd2) == -1)
- 		return (0);
+	// while (p < 3)
+	// {
+	// 	if (get_next_line(fd, &str) == 1)
+	// 	{
+	// 		printf("str1 %s\n", str);
+	// 		free(str);
+	// 	}
+	// 	else
+	// 		p++;
+	// 	if (get_next_line(fd1, &str) == 1)
+	// 	{
+	// 		printf("str2.2 %s\n", str);
+	// 		free(str);
+	// 	}
+	// 	else
+	// 		p++;
+	// 	if (get_next_line(fd2, &str) == 1)
+	// 	{
+	// 		printf("str3.2 %s\n", str);
+	// 		free(str);
+	// 	}
+	// 	else
+	// 		p++;
+	// }
+ 	// while (1);
+	system("leaks gnl");
  	return (0);
  }

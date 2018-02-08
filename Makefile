@@ -7,7 +7,7 @@ all: liba GNL
 liba:
 	@make -C libft/
 GNL: $(OBJ)
-	gcc $(OBJ) -L libft/ -lft
+	gcc -o gnl $(OBJ) -L libft/ -lft
 %.o: %.c
 		gcc $(FLAGS) -I libft/includes -c -o $@ $<
 
