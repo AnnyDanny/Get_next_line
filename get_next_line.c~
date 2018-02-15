@@ -6,7 +6,7 @@
 /*   By: gdanylov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 21:07:01 by gdanylov          #+#    #+#             */
-/*   Updated: 2018/02/15 17:55:12 by gdanylov         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:54:20 by gdanylov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <string.h>
 
-t_list			*multifile_get_in_list(int fd, t_list **vika)
+t_list	*multifile_get_in_list(int fd, t_list **vika)
 {
 	t_list	*buf;
 	t_list	*new;
@@ -41,7 +41,7 @@ t_list			*multifile_get_in_list(int fd, t_list **vika)
 	return (*vika);
 }
 
-int				get_in_list(char *tmp, t_list *list, char **line)
+int		get_in_list(char *tmp, t_list *list, char **line)
 {
 	int			i;
 	char		*tmp2;
@@ -63,7 +63,7 @@ int				get_in_list(char *tmp, t_list *list, char **line)
 	return (1);
 }
 
-void			read_func(t_struct *s, int fd)
+void	read_func(t_struct *s, int fd)
 {
 	while (((*s).ret = read(fd, (*s).buf, BUFF_SIZE)) > 0)
 	{
@@ -76,9 +76,9 @@ void			read_func(t_struct *s, int fd)
 	}
 }
 
-int				get_next_line(const int fd, char **line)
+int		get_next_line(const int fd, char **line)
 {
-	static t_list	*vika;
+	static			t_list *vika;
 	t_struct		s;
 
 	s.buf = ft_strnew(BUFF_SIZE);

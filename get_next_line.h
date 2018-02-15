@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#ifndef GNL_H
-# define GNL_H
+# include "libft.h"
 
 # define BUFF_SIZE 5
 
-typedef struct	t_struct
+typedef struct	s_struct
 {
 	char		*t;
 	char		*d;
@@ -25,9 +25,9 @@ typedef struct	t_struct
 	char		*buf;
 	char		*tmp;
 	t_list		*buf2;
-	// static		t_list *vika;
 }				t_struct;
 
-int 	get_next_line(const int fd, char **line);
+void			read_func(t_struct *s, int fd);
+int				get_next_line(const int fd, char **line);
 
 #endif
