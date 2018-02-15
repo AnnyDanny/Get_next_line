@@ -85,6 +85,8 @@ int				get_next_line(const int fd, char **line)
 	s.tmp = ft_strnew(BUFF_SIZE);
 	s.buf2 = multifile_get_in_list(fd, &vika);
 	read_func(&s, fd);
+	if (s.ret == -1 || fd < 0 || BUFF_SIZE < 1 || !line)
+		return (-1);
 	free(s.buf);
 	s.d = s.tmp;
 	s.tmp = ft_strjoin(s.buf2->content, s.tmp);
@@ -95,8 +97,6 @@ int				get_next_line(const int fd, char **line)
 		free(s.tmp);
 		return (0);
 	}
-	if (s.ret == -1)
-		return (-1);
 	get_in_list(s.tmp, s.buf2, line);
 	return (1);
 }
