@@ -55,11 +55,11 @@ int				get_in_list(char *tmp, t_list *list, char **line)
 		tmp++;
 		tmp2 = list->content;
 		list->content = ft_strdup(tmp);
-		free(tmp2);
+		ft_strdel(&tmp2);
 	}
 	else
 		ft_bzero(list->content, ft_strlen(list->content));
-	free(g);
+	ft_strdel(&g);
 	return (1);
 }
 
@@ -69,7 +69,7 @@ void			read_func(t_struct *s, int fd)
 	{
 		(*s).t = (*s).tmp;
 		(*s).tmp = ft_strjoin((*s).tmp, (*s).buf);
-		free((*s).t);
+		ft_strdel(&(*s).t);
 		ft_strclr((*s).buf);
 		if (ft_strchr((*s).tmp, '\n'))
 			break ;
@@ -87,14 +87,14 @@ int				get_next_line(const int fd, char **line)
 	read_func(&s, fd);
 	if (s.ret == -1 || fd < 0 || BUFF_SIZE < 1 || !line)
 		return (-1);
-	free(s.buf);
+	ft_strdel(&s.buf);
 	s.d = s.tmp;
 	s.tmp = ft_strjoin(s.buf2->content, s.tmp);
-	free(s.d);
+	ft_strdel(&s.d);
 	if (ft_strlen(s.tmp) == 0 && s.ret == 0
 	&& (vika == NULL || ft_strlen(s.buf2->content) == 0))
 	{
-		free(s.tmp);
+		ft_strdel(&s.tmp);
 		return (0);
 	}
 	get_in_list(s.tmp, s.buf2, line);
